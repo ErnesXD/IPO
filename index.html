@@ -1,11 +1,625 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ProbabilityMaster - Análisis de Decisiones</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #334e68;
+            --accent-color: #61dafb;
+            --background-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        .tagline {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .main-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .input-card, .result-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.25);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .result-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .result-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loading {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .decision-header {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .decision-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .decision-item {
+            margin-bottom: 1.2rem;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background-color: rgba(74, 111, 165, 0.05);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .decision-title {
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .percentage {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .decision-details {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .scenario-summary {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem;
+            background-color: rgba(97, 218, 251, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .factors-section {
+            margin-top: 1.5rem;
+        }
+
+        .factors-title {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .factor-chip {
+            display: inline-block;
+            background-color: rgba(74, 111, 165, 0.1);
+            padding: 0.4rem 0.8rem;
+            margin: 0.25rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .input-card, .result-card {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <h1>ProbabilityMaster</h1>
+            <p class="tagline">Análisis avanzado de decisiones basado en probabilidades</p>
+        </header>
+
+        <div class="main-section">
+            <div class="input-card">
+                <h2>Describe tu situación</h2>
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <select id="category">
+                        <option value="">Selecciona una categoría</option>
+                        <option value="business">Negocios</option>
+                        <option value="personal">Personal</option>
+                        <option value="career">Carrera profesional</option>
+                        <option value="finance">Finanzas</option>
+                        <option value="health">Salud</option>
+                        <option value="education">Educación</option>
+                        <option value="other">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="complexity">Complejidad de la decisión</label>
+                    <select id="complexity">
+                        <option value="">Selecciona la complejidad</option>
+                        <option value="low">Baja - Pocas variables a considerar</option>
+                        <option value="medium">Media - Varias variables importantes</option>
+                        <option value="high">Alta - Muchas variables interdependientes</option>
+                        <option value="critical">Crítica - Decisión de alto impacto</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="situation">Describe tu situación en detalle</label>
+                    <textarea id="situation" placeholder="Describe la situación para la que necesitas tomar una decisión. Intenta incluir todos los detalles relevantes que puedan afectar el resultado."></textarea>
+                </div>
+
+                <button id="analyze-btn">Analizar Probabilidades</button>
+            </div>
+
+            <div class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analizando posibles escenarios...</p>
+            </div>
+
+            <div class="result-card hidden">
+                <h2 class="decision-header">Análisis de Probabilidades</h2>
+                
+                <div class="scenario-summary" id="scenario-summary">
+                    <!-- El resumen de la situación se mostrará aquí -->
+                </div>
+                
+                <ul class="decision-list" id="decisions">
+                    <!-- Las decisiones con porcentajes se mostrarán aquí -->
+                </ul>
+                
+                <div class="factors-section">
+                    <h3 class="factors-title">Factores considerados en el análisis:</h3>
+                    <div id="factors">
+                        <!-- Los factores se mostrarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const categorySelect = document.getElementById('category');
+            const complexitySelect = document.getElementById('complexity');
+            const situationTextarea = document.getElementById('situation');
+            const loadingDiv = document.querySelector('.loading');
+            const resultCard = document.querySelector('.result-card');
+            const scenarioSummary = document.getElementById('scenario-summary');
+            const decisionsContainer = document.getElementById('decisions');
+            const factorsContainer = document.getElementById('factors');
+
+            // Base de datos simulada de situaciones y decisiones
+            const decisionDatabase = {
+                business: {
+                    keywords: ['inversión', 'empresa', 'mercado', 'negocio', 'cliente', 'producto', 'venta', 'estrategia', 'competencia', 'fusión', 'expansión'],
+                    decisions: [
+                        { title: 'Expandir el negocio', details: 'Ampliar operaciones a nuevos mercados o aumentar la capacidad productiva.' },
+                        { title: 'Mantener operaciones actuales', details: 'Continuar con el enfoque actual y optimizar procesos existentes.' },
+                        { title: 'Pivotear el modelo de negocio', details: 'Cambiar significativamente la propuesta de valor o el enfoque estratégico.' },
+                        { title: 'Formar alianza estratégica', details: 'Colaborar con otras empresas para unir fortalezas y ampliar el alcance.' },
+                        { title: 'Reducir operaciones', details: 'Disminuir escala para enfocarse en áreas más rentables y reducir costos.' },
+                        { title: 'Invertir en innovación', details: 'Destinar recursos a I+D para desarrollar nuevos productos o servicios.' }
+                    ],
+                    factors: ['Condiciones del mercado', 'Rendimiento financiero', 'Competencia', 'Recursos disponibles', 'Tendencias de consumo', 'Regulaciones']
+                },
+                personal: {
+                    keywords: ['relación', 'familia', 'amigo', 'mudanza', 'cambio', 'pareja', 'hogar', 'tiempo', 'balance', 'compromiso'],
+                    decisions: [
+                        { title: 'Mantener la situación actual', details: 'Continuar en el mismo camino sin cambios significativos.' },
+                        { title: 'Iniciar conversación directa', details: 'Hablar abiertamente sobre la situación buscando claridad.' },
+                        { title: 'Buscar compromiso mutuo', details: 'Negociar una solución que acomode parcialmente las necesidades de todas las partes.' },
+                        { title: 'Tomar tiempo para reflexionar', details: 'Hacer una pausa antes de tomar una decisión definitiva.' },
+                        { title: 'Hacer cambio radical', details: 'Implementar un cambio significativo en la dinámica o situación actual.' },
+                        { title: 'Buscar consejo profesional', details: 'Consultar con un experto para obtener orientación especializada.' }
+                    ],
+                    factors: ['Bienestar emocional', 'Relaciones personales', 'Valores individuales', 'Historia previa', 'Apoyo social', 'Metas personales']
+                },
+                career: {
+                    keywords: ['trabajo', 'empleo', 'carrera', 'profesional', 'ascenso', 'cambio', 'salario', 'jefe', 'compañía', 'formación', 'habilidades'],
+                    decisions: [
+                        { title: 'Permanecer en posición actual', details: 'Continuar en el mismo rol buscando crecimiento interno.' },
+                        { title: 'Solicitar promoción o aumento', details: 'Negociar mejores condiciones en la posición actual.' },
+                        { title: 'Buscar nuevo empleo', details: 'Explorar oportunidades en otras organizaciones.' },
+                        { title: 'Invertir en formación adicional', details: 'Adquirir nuevas habilidades o certificaciones para mejorar tu perfil.' },
+                        { title: 'Cambiar de sector o industria', details: 'Hacer una transición hacia un campo profesional diferente.' },
+                        { title: 'Emprender proyecto propio', details: 'Iniciar un negocio o proyecto independiente.' }
+                    ],
+                    factors: ['Satisfacción laboral', 'Compensación', 'Oportunidades de crecimiento', 'Cultura organizacional', 'Demanda del mercado', 'Balance vida-trabajo']
+                },
+                finance: {
+                    keywords: ['dinero', 'inversión', 'ahorro', 'gasto', 'deuda', 'préstamo', 'hipoteca', 'retiro', 'presupuesto', 'riesgo'],
+                    decisions: [
+                        { title: 'Invertir en activos de bajo riesgo', details: 'Priorizar la seguridad con inversiones conservadoras.' },
+                        { title: 'Diversificar cartera de inversiones', details: 'Distribuir recursos entre diferentes tipos de activos.' },
+                        { title: 'Reducir deudas prioritariamente', details: 'Enfocar recursos en pagar obligaciones pendientes.' },
+                        { title: 'Aumentar fondo de emergencia', details: 'Incrementar ahorros líquidos para imprevistos.' },
+                        { title: 'Buscar asesoría financiera profesional', details: 'Consultar con expertos para optimizar estrategia.' },
+                        { title: 'Invertir en activos de mayor riesgo', details: 'Buscar mayor rendimiento asumiendo más volatilidad.' }
+                    ],
+                    factors: ['Horizonte temporal', 'Tolerancia al riesgo', 'Objetivos financieros', 'Condiciones del mercado', 'Situación económica personal', 'Inflación']
+                },
+                health: {
+                    keywords: ['salud', 'médico', 'tratamiento', 'enfermedad', 'síntomas', 'medicina', 'terapia', 'dieta', 'ejercicio', 'estrés', 'bienestar'],
+                    decisions: [
+                        { title: 'Consultar médico especialista', details: 'Buscar opinión de un profesional con experiencia específica.' },
+                        { title: 'Modificar hábitos de vida', details: 'Realizar cambios en alimentación, ejercicio o rutinas diarias.' },
+                        { title: 'Seguir tratamiento convencional', details: 'Adherirse a las prácticas médicas establecidas.' },
+                        { title: 'Buscar segunda opinión médica', details: 'Consultar a otro profesional para contrastar diagnóstico.' },
+                        { title: 'Explorar terapias complementarias', details: 'Investigar opciones que complementen el tratamiento principal.' },
+                        { title: 'Enfoque en prevención', details: 'Priorizar acciones que reduzcan riesgos futuros.' }
+                    ],
+                    factors: ['Historial médico', 'Evidencia científica', 'Calidad de vida', 'Efectos secundarios', 'Acceso a atención', 'Costo del tratamiento']
+                },
+                education: {
+                    keywords: ['estudio', 'universidad', 'curso', 'carrera', 'aprendizaje', 'educación', 'grado', 'máster', 'formación', 'especialización'],
+                    decisions: [
+                        { title: 'Continuar educación formal', details: 'Seguir un programa académico estructurado.' },
+                        { title: 'Optar por aprendizaje autodidacta', details: 'Desarrollar habilidades mediante estudio independiente.' },
+                        { title: 'Cambiar especialización o enfoque', details: 'Reorientar estudios hacia un área diferente.' },
+                        { title: 'Buscar experiencia práctica', details: 'Priorizar aplicación real de conocimientos mediante prácticas o proyectos.' },
+                        { title: 'Invertir en formación especializada', details: 'Enfocarse en cursos o certificaciones específicas del sector.' },
+                        { title: 'Pausar estudios temporalmente', details: 'Tomar un período sabático para reevaluar objetivos.' }
+                    ],
+                    factors: ['Objetivos profesionales', 'Mercado laboral', 'Recursos disponibles', 'Tiempo disponible', 'Retorno de inversión', 'Intereses personales']
+                },
+                other: {
+                    keywords: [],
+                    decisions: [
+                        { title: 'Opción conservadora', details: 'Enfoque de menor riesgo manteniendo el status quo.' },
+                        { title: 'Enfoque progresivo', details: 'Implementar cambios graduales evaluando resultados.' },
+                        { title: 'Solución innovadora', details: 'Adoptar un enfoque creativo y no convencional.' },
+                        { title: 'Buscar más información', details: 'Recopilar datos adicionales antes de decidir.' },
+                        { title: 'Colaborar con otros', details: 'Involucrar a más personas en el proceso de decisión.' },
+                        { title: 'Acción inmediata', details: 'Respuesta rápida para aprovechar oportunidades o mitigar riesgos.' }
+                    ],
+                    factors: ['Urgencia', 'Impacto potencial', 'Recursos disponibles', 'Riesgos involucrados', 'Beneficios esperados', 'Factores externos']
+                }
+            };
+
+            // Función para analizar la situación y generar resultados
+            analyzeBtn.addEventListener('click', function() {
+                const category = categorySelect.value;
+                const complexity = complexitySelect.value;
+                const situation = situationTextarea.value.trim();
+
+                // Validación básica
+                if (!category || !complexity || situation.length < 20) {
+                    alert('Por favor, selecciona una categoría, una complejidad y describe tu situación con suficiente detalle (mínimo 20 caracteres).');
+                    return;
+                }
+
+                // Mostrar cargando
+                loadingDiv.classList.remove('hidden');
+                resultCard.classList.add('hidden');
+                
+                // Simular tiempo de procesamiento (2-4 segundos)
+                setTimeout(() => {
+                    generateResults(category, complexity, situation);
+                    
+                    // Ocultar cargando y mostrar resultados
+                    loadingDiv.classList.add('hidden');
+                    resultCard.classList.remove('hidden');
+                    
+                    // Animar aparición de resultados
+                    setTimeout(() => {
+                        resultCard.classList.add('visible');
+                    }, 50);
+                    
+                }, Math.random() * 2000 + 2000);
+            });
+
+            function generateResults(category, complexity, situation) {
+                // Seleccionar la categoría de la base de datos
+                const categoryData = decisionDatabase[category];
+                
+                // Generar un resumen de la situación
+                scenarioSummary.textContent = `Analizando: ${summarizeSituation(situation)}`;
+                
+                // Determinar qué decisiones mostrar basado en palabras clave
+                let selectedDecisions = selectRelevantDecisions(categoryData, situation);
+                
+                // Generar porcentajes basados en complejidad y texto
+                const decisionPercentages = generatePercentages(selectedDecisions.length, complexity, situation);
+                
+                // Combinar decisiones con porcentajes y ordenar de mayor a menor
+                const finalDecisions = selectedDecisions.map((decision, index) => {
+                    return {
+                        ...decision,
+                        percentage: decisionPercentages[index]
+                    };
+                }).sort((a, b) => b.percentage - a.percentage);
+                
+                // Mostrar decisiones
+                displayDecisions(finalDecisions);
+                
+                // Mostrar factores considerados
+                displayFactors(categoryData.factors);
+            }
+
+            function summarizeSituation(situation) {
+                // Simplemente devuelve una versión truncada de la situación
+                if (situation.length > 120) {
+                    return situation.substring(0, 120) + '...';
+                }
+                return situation;
+            }
+
+            function selectRelevantDecisions(categoryData, situation) {
+                // Por defecto, usar todas las decisiones de la categoría
+                let selectedDecisions = [...categoryData.decisions];
+                
+                // Si hay palabras clave, intentar filtrar por relevancia
+                if (categoryData.keywords && categoryData.keywords.length > 0) {
+                    const situationLower = situation.toLowerCase();
+                    
+                    // Contar ocurrencias de palabras clave
+                    const keywordOccurrences = categoryData.keywords.filter(keyword => 
+                        situationLower.includes(keyword.toLowerCase())
+                    );
+                    
+                    // Si hay suficientes palabras clave, filtrar decisiones
+                    if (keywordOccurrences.length > 0) {
+                        // Mantener todas las decisiones pero ajustar el orden
+                        selectedDecisions = shuffleArray([...selectedDecisions]);
+                    }
+                }
+                
+                // Limitar a 4-5 decisiones dependiendo de la longitud de la situación
+                const numDecisions = situation.length > 200 ? 5 : 4;
+                return selectedDecisions.slice(0, numDecisions);
+            }
+
+            function generatePercentages(numDecisions, complexity, situation) {
+                // Base para generar porcentajes que sumen 100%
+                let percentages = [];
+                
+                // Factor de aleatoriedad basado en complejidad
+                const randomFactor = {
+                    'low': 5,
+                    'medium': 10,
+                    'high': 15,
+                    'critical': 20
+                }[complexity];
+                
+                // Generar valor base para el primer porcentaje
+                let firstValue;
+                
+                switch (complexity) {
+                    case 'low':
+                        firstValue = 50 + Math.floor(Math.random() * 15);
+                        break;
+                    case 'medium':
+                        firstValue = 40 + Math.floor(Math.random() * 15);
+                        break;
+                    case 'high':
+                        firstValue = 35 + Math.floor(Math.random() * 10);
+                        break;
+                    case 'critical':
+                        firstValue = 30 + Math.floor(Math.random() * 10);
+                        break;
+                    default:
+                        firstValue = 40;
+                }
+                
+                // Asignar el primer valor
+                percentages.push(firstValue);
+                
+                // Distribuir el resto aleatoriamente
+                let remaining = 100 - firstValue;
+                for (let i = 1; i < numDecisions; i++) {
+                    // Si es el último, tomar todo el restante
+                    if (i === numDecisions - 1) {
+                        percentages.push(remaining);
+                    } else {
+                        // Calcular valor para esta posición
+                        const maxValue = remaining - (numDecisions - i - 1) * 5; // Garantizar al menos 5% para cada restante
+                        const value = Math.max(5, Math.min(maxValue - 5, Math.floor(remaining / (numDecisions - i)) + Math.floor(Math.random() * randomFactor) - randomFactor/2));
+                        percentages.push(value);
+                        remaining -= value;
+                    }
+                }
+                
+                // Introducir variación basada en texto
+                const textLength = situation.length;
+                if (textLength > 300) {
+                    // Para textos muy detallados, hacer el primer valor más confiable
+                    percentages[0] += 3;
+                    // Ajustar el resto para mantener suma en 100%
+                    let adjustment = 3 / (numDecisions - 1);
+                    for (let i = 1; i < numDecisions; i++) {
+                        percentages[i] -= adjustment;
+                    }
+                }
+                
+                // Asegurar que todos sean enteros y la suma sea exactamente 100
+                percentages = percentages.map(p => Math.round(p));
+                
+                // Ajuste final para garantizar suma 100
+                const sum = percentages.reduce((acc, val) => acc + val, 0);
+                if (sum !== 100) {
+                    percentages[0] += (100 - sum);
+                }
+                
+                return percentages;
+            }
+
+            function displayDecisions(decisions) {
+                decisionsContainer.innerHTML = '';
+                
+                decisions.forEach(decision => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'decision-item';
+                    
+                    listItem.innerHTML = `
+                        <div class="decision-title">
+                            <span>${decision.title}</span>
+                            <span class="percentage">${decision.percentage}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${decision.percentage}%"></div>
+                        </div>
+                        <div class="decision-details">${decision.details}</div>
+                    `;
+                    
+                    decisionsContainer.appendChild(listItem);
+                });
+            }
+
+            function displayFactors(factors) {
+                factorsContainer.innerHTML = '';
+                
+                factors.forEach(factor => {
+                    const factorChip = document.createElement('span');
+                    factorChip.className = 'factor-chip';
+                    factorChip.textContent = factor;
+                    factorsContainer.appendChild(factorChip);
+                });
+            }
+
+            // Función de utilidad para mezclar un array
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+        });
+    </script>
 </body>
 </html>
