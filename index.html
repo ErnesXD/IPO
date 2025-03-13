@@ -1,563 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DecisionIA - Asistente de Decisiones</title>
-    <style>
-        :root {
-            --primary: #4a6fa5;
-            --secondary: #166088;
-            --accent: #4fc3dc;
-            --background: #f5f7fa;
-            --text: #333;
-            --card: #fff;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DecisionIA - Asistente Inteligente para Decisiones</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <span class="material-icons" style="font-size: 3rem">psychology</span>
+      </div>
+      <h1>DecisionIA</h1>
+      <p>
+        Asistente inteligente para la toma de decisiones basado en IA Generativa
+      </p>
+    </header>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .input-section {
-            background-color: var(--card);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px var(--shadow);
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--secondary);
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-
-        textarea.input-field {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .results-section {
-            background-color: var(--card);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px var(--shadow);
-            display: none;
-        }
-
-        .results-header {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .situation-summary {
-            background-color: #f5f7fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 25px;
-            font-style: italic;
-        }
-
-        .options-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .option-card {
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 15px;
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .option-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .probability-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--primary);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-weight: bold;
-        }
-
-        .option-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            padding-right: 70px;
-        }
-
-        .option-description {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px 0;
-            display: none;
-        }
-
-        .loading-spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            background-color: #fff2f2;
-            color: #d32f2f;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            .options-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Animaciones */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #777;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
     <div class="container">
-        <header>
-            <h1>DecisionIA</h1>
-            <p class="subtitle">Asistente inteligente para toma de decisiones basado en probabilidades</p>
-        </header>
-
-        <section class="input-section">
-            <div class="form-group">
-                <label for="situation">Describe tu situación o dilema:</label>
-                <textarea id="situation" class="input-field" placeholder="Ejemplo: Estoy considerando cambiar de trabajo. Tengo una oferta con mejor salario pero en otra ciudad..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="context">Contexto adicional (opcional):</label>
-                <textarea id="context" class="input-field" placeholder="Añade cualquier información relevante que pueda afectar a la decisión..."></textarea>
-            </div>
-
-            <button id="analyze-btn" class="btn">Analizar Situación</button>
-        </section>
-
-        <div class="loading">
-            <div class="loading-spinner"></div>
-            <p>Analizando tu situación con IA avanzada...</p>
+      <section class="card input-section">
+        <div class="form-group">
+          <label for="situation">
+            <span class="material-icons icon">help_outline</span>
+            Describe tu situación o dilema:
+          </label>
+          <textarea
+            id="situation"
+            class="input-field"
+            placeholder="Ejemplo: Estoy considerando cambiar de trabajo. Tengo una oferta con mejor salario pero implicaría mudarme a otra ciudad..."
+          ></textarea>
         </div>
-
-        <div class="error-message">
-            Ocurrió un error al procesar tu solicitud. Por favor, intenta de nuevo.
+        <div class="form-group">
+          <label for="context">
+            <span class="material-icons icon">info_outline</span>
+            Contexto adicional (opcional):
+          </label>
+          <textarea
+            id="context"
+            class="input-field"
+            placeholder="Añade información relevante como tus prioridades, valores, restricciones o cualquier factor importante..."
+          ></textarea>
         </div>
+        <button id="analyze-btn" class="btn">
+          <span class="material-icons icon">analytics</span>
+          Analizar Situación
+        </button>
+      </section>
 
-        <section class="results-section">
-            <h2 class="results-header">Análisis de Decisiones</h2>
-            
-            <div class="situation-summary"></div>
-            
-            <div class="options-container"></div>
-        </section>
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Analizando tu situación con IA avanzada...</p>
+      </div>
 
-        <div class="footer">
-            <p>© 2025 DecisionIA - Asistente de toma de decisiones con IA Generativa</p>
-            <p>Nota: Las probabilidades mostradas son simuladas con fines ilustrativos.</p>
+      <div class="error-message">
+        <span
+          class="material-icons"
+          style="vertical-align: middle; margin-right: 8px"
+          >error_outline</span
+        >
+        Ocurrió un error al procesar tu solicitud. Por favor, inténtalo de
+        nuevo.
+      </div>
+
+      <section class="card results-section">
+        <h2 class="results-header">Análisis de Decisiones</h2>
+        <div class="situation-summary"></div>
+        <div class="options-container"></div>
+        <div style="text-align: center; margin-top: 30px">
+          <button id="restart-btn" class="restart-btn">
+            <span class="material-icons icon">refresh</span>
+            Nueva Consulta
+          </button>
         </div>
+      </section>
+
+      <section class="features-section">
+        <div class="feature-card">
+          <span class="material-icons feature-icon">psychology</span>
+          <h3 class="feature-title">IA Avanzada</h3>
+          <p class="feature-description">
+            Utilizamos algoritmos de inteligencia artificial de última
+            generación para analizar tu situación y ofrecer perspectivas
+            objetivas.
+          </p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons feature-icon">privacy_tip</span>
+          <h3 class="feature-title">Privacidad Total</h3>
+          <p class="feature-description">
+            Tus datos no se almacenan. Tu información se utiliza únicamente para
+            procesar tu consulta actual.
+          </p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons feature-icon">lightbulb</span>
+          <h3 class="feature-title">Enfoque Múltiple</h3>
+          <p class="feature-description">
+            Analizamos tu situación desde diferentes ángulos para darte una
+            visión completa de tus opciones.
+          </p>
+        </div>
+      </section>
+
+      <div class="footer">
+        <p>
+          © 2025 DecisionIA - Asistente de toma de decisiones con IA Generativa
+        </p>
+        <div class="disclaimer">
+          <p>
+            Nota: Las probabilidades mostradas son ilustrativas. DecisionIA es
+            una herramienta de asistencia y las decisiones finales siempre deben
+            ser tomadas considerando tu propio criterio.
+            <a href="#">Términos de uso</a>
+          </p>
+        </div>
+      </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const analyzeBtn = document.getElementById('analyze-btn');
-            const situationInput = document.getElementById('situation');
-            const contextInput = document.getElementById('context');
-            const loadingSection = document.querySelector('.loading');
-            const resultsSection = document.querySelector('.results-section');
-            const situationSummary = document.querySelector('.situation-summary');
-            const optionsContainer = document.querySelector('.options-container');
-            const errorMessage = document.querySelector('.error-message');
-
-            // Sistema de IA simulado para generar respuestas
-            const decisionAI = {
-                // Generador de opciones basado en el texto de entrada
-                generateOptions: function(situation, context = '') {
-                    return new Promise((resolve, reject) => {
-                        // Simulamos un tiempo de procesamiento para dar la impresión de análisis
-                        setTimeout(() => {
-                            try {
-                                // Palabras clave para adaptar las respuestas
-                                const keywords = this.extractKeywords(situation + ' ' + context);
-                                
-                                // Generamos opciones adaptadas a las palabras clave
-                                const options = this.createAdaptiveOptions(situation, keywords);
-                                
-                                // Generamos probabilidades que sumen 100%
-                                const probabilities = this.generateProbabilities(4);
-                                
-                                // Combinamos opciones y probabilidades
-                                const result = options.map((option, index) => {
-                                    return {
-                                        title: option.title,
-                                        description: option.description,
-                                        probability: probabilities[index]
-                                    };
-                                });
-
-                                // Añadimos la opción "Otros"
-                                const otherProb = 100 - probabilities.reduce((a, b) => a + b, 0);
-                                result.push({
-                                    title: "Otros enfoques",
-                                    description: "Existen otras alternativas menos probables que también podrían considerarse según evolucione la situación.",
-                                    probability: otherProb
-                                });
-
-                                resolve(result);
-                            } catch (error) {
-                                reject("Error en el procesamiento de la IA");
-                            }
-                        }, 2000); // Simulamos 2 segundos de procesamiento
-                    });
-                },
-
-                // Extrae palabras clave del texto para adaptar las respuestas
-                extractKeywords: function(text) {
-                    const commonWords = ['el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas', 'y', 'o', 'pero', 'si', 'no', 'porque', 'aunque', 'cuando', 'como', 'donde', 'que', 'quien', 'cuyo', 'cuya', 'este', 'esta', 'estos', 'estas', 'ese', 'esa', 'esos', 'esas', 'aquel', 'aquella', 'aquellos', 'aquellas', 'de', 'del', 'al', 'a', 'ante', 'bajo', 'cabe', 'con', 'contra', 'desde', 'en', 'entre', 'hacia', 'hasta', 'para', 'por', 'según', 'sin', 'so', 'sobre', 'tras'];
-                    
-                    // Filtrar palabras comunes y obtener palabras únicas
-                    return text.toLowerCase()
-                        .replace(/[^\w\sáéíóúüñ]/g, '')
-                        .split(/\s+/)
-                        .filter(word => word.length > 3 && !commonWords.includes(word))
-                        .filter((word, index, self) => self.indexOf(word) === index)
-                        .slice(0, 10); // Tomamos máximo 10 palabras clave
-                },
-
-                // Crea opciones adaptadas a la situación y palabras clave
-                createAdaptiveOptions: function(situation, keywords) {
-                    // Categorías de decisiones
-                    const categories = {
-                        personal: ['vida', 'familia', 'relación', 'pareja', 'salud', 'bienestar', 'felicidad', 'tiempo', 'balance'],
-                        profesional: ['trabajo', 'carrera', 'empleo', 'profesional', 'negocio', 'empresa', 'estudio', 'universidad', 'educación'],
-                        financiera: ['dinero', 'inversión', 'compra', 'venta', 'precio', 'costo', 'gasto', 'financiero', 'económico'],
-                        viajes: ['viaje', 'vacaciones', 'destino', 'ciudad', 'país', 'viajar', 'conocer', 'turismo']
-                    };
-                    
-                    // Determinar categoría principal
-                    let mainCategory = 'general';
-                    let maxMatches = 0;
-                    
-                    for (const [category, terms] of Object.entries(categories)) {
-                        const matches = keywords.filter(word => terms.some(term => word.includes(term))).length;
-                        if (matches > maxMatches) {
-                            maxMatches = matches;
-                            mainCategory = category;
-                        }
-                    }
-                    
-                    // Plantillas de respuestas por categoría
-                    const templates = {
-                        personal: [
-                            {
-                                title: "Priorizar el bienestar personal",
-                                description: "Enfocarse en lo que realmente te hace feliz y contribuye a tu bienestar emocional a largo plazo."
-                            },
-                            {
-                                title: "Buscar equilibrio",
-                                description: "Encontrar un balance entre tus necesidades personales y los compromisos con otros aspectos de tu vida."
-                            },
-                            {
-                                title: "Comunicación abierta",
-                                description: "Expresar claramente tus sentimientos y expectativas con las personas involucradas en la situación."
-                            },
-                            {
-                                title: "Período de reflexión",
-                                description: "Tomar tiempo para meditar sobre la decisión sin presiones externas, quizás consultando con personas de confianza."
-                            }
-                        ],
-                        profesional: [
-                            {
-                                title: "Desarrollo profesional",
-                                description: "Priorizar oportunidades que potencien tu crecimiento y adquisición de nuevas habilidades en tu campo."
-                            },
-                            {
-                                title: "Estabilidad y seguridad",
-                                description: "Optar por el camino que ofrezca mayor estabilidad a largo plazo, considerando factores como contrato y empresa."
-                            },
-                            {
-                                title: "Networking estratégico",
-                                description: "Elegir la opción que te permita conectar con profesionales influyentes en tu sector y ampliar tu red de contactos."
-                            },
-                            {
-                                title: "Innovación y cambio",
-                                description: "Apostar por entornos que fomenten la creatividad y te permitan implementar nuevas ideas y metodologías."
-                            }
-                        ],
-                        financiera: [
-                            {
-                                title: "Maximizar rentabilidad",
-                                description: "Elegir la opción que ofrezca el mejor retorno económico a medio-largo plazo, considerando todos los factores."
-                            },
-                            {
-                                title: "Diversificación de riesgos",
-                                description: "Distribuir recursos entre diferentes alternativas para minimizar el impacto de posibles pérdidas."
-                            },
-                            {
-                                title: "Ahorro estratégico",
-                                description: "Priorizar el ahorro y la construcción de un fondo de emergencia antes de compromisos financieros mayores."
-                            },
-                            {
-                                title: "Análisis costo-beneficio",
-                                description: "Evaluar minuciosamente los costos ocultos y beneficios a largo plazo de cada alternativa disponible."
-                            }
-                        ],
-                        viajes: [
-                            {
-                                title: "Experiencias auténticas",
-                                description: "Priorizar destinos y actividades que ofrezcan experiencias culturales genuinas y memorables."
-                            },
-                            {
-                                title: "Planificación flexible",
-                                description: "Mantener un itinerario adaptable que permita aprovechar oportunidades inesperadas durante el viaje."
-                            },
-                            {
-                                title: "Optimización de recursos",
-                                description: "Distribuir el presupuesto priorizando experiencias de mayor valor personal sobre comodidades innecesarias."
-                            },
-                            {
-                                title: "Destinos alternativos",
-                                description: "Considerar lugares menos turísticos pero con atractivos similares a los destinos más populares."
-                            }
-                        ],
-                        general: [
-                            {
-                                title: "Análisis racional",
-                                description: "Evaluar pros y contras de forma objetiva, priorizando factores según su importancia real en tu vida."
-                            },
-                            {
-                                title: "Intuición consciente",
-                                description: "Prestar atención a tus sentimientos e intuición después de haber analizado todos los factores relevantes."
-                            },
-                            {
-                                title: "Consulta externa",
-                                description: "Buscar la opinión de personas con experiencia en situaciones similares o expertos en el tema."
-                            },
-                            {
-                                title: "Experimentación controlada",
-                                description: "Probar alternativas a pequeña escala cuando sea posible antes de comprometerse completamente."
-                            }
-                        ]
-                    };
-                    
-                    // Personalizar opciones con palabras clave
-                    const options = templates[mainCategory].map(template => {
-                        let description = template.description;
-                        
-                        // Añadir personalización basada en palabras clave si hay suficientes
-                        if (keywords.length >= 3) {
-                            const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
-                            if (Math.random() > 0.5) {
-                                description += ` Considerando el factor "${randomKeyword}", esta opción podría adaptarse especialmente bien a tu situación.`;
-                            }
-                        }
-                        
-                        return {
-                            title: template.title,
-                            description: description
-                        };
-                    });
-                    
-                    return options;
-                },
-
-                // Genera probabilidades aleatorias que sumen aproximadamente un valor objetivo
-                generateProbabilities: function(count) {
-                    // Generamos valores aleatorios iniciales
-                    let probs = Array(count).fill().map(() => Math.random());
-                    
-                    // Normalizamos para que sumen menos de 100
-                    const total = probs.reduce((a, b) => a + b, 0);
-                    probs = probs.map(p => Math.floor((p / total) * 85)); // Dejamos margen para "Otros"
-                    
-                    // Aseguramos que ninguna sea 0 y ajustamos si es necesario
-                    probs = probs.map(p => p < 5 ? 5 : p);
-                    
-                    // Ajustamos la última para que sumen cerca de 90-95%
-                    const currentSum = probs.reduce((a, b) => a + b, 0);
-                    if (currentSum > 95) {
-                        const excess = currentSum - 95;
-                        const indexToReduce = probs.indexOf(Math.max(...probs));
-                        probs[indexToReduce] = Math.max(5, probs[indexToReduce] - excess);
-                    }
-                    
-                    // Ordenamos de mayor a menor
-                    return probs.sort((a, b) => b - a);
-                }
-            };
-
-            // Event listeners
-            analyzeBtn.addEventListener('click', function() {
-                const situation = situationInput.value.trim();
-                const context = contextInput.value.trim();
-                
-                if (situation.length < 10) {
-                    alert('Por favor, describe tu situación con más detalle.');
-                    return;
-                }
-                
-                // Mostrar pantalla de carga y ocultar otras secciones
-                loadingSection.style.display = 'block';
-                resultsSection.style.display = 'none';
-                errorMessage.style.display = 'none';
-                
-                // Llamar al sistema de IA
-                decisionAI.generateOptions(situation, context)
-                    .then(options => {
-                        // Ocultar carga y mostrar resultados
-                        loadingSection.style.display = 'none';
-                        resultsSection.style.display = 'block';
-                        
-                        // Actualizar el resumen de la situación
-                        situationSummary.textContent = situation;
-                        
-                        // Limpiar y actualizar opciones
-                        optionsContainer.innerHTML = '';
-                        
-                        // Añadir cada opción con animación escalonada
-                        options.forEach((option, index) => {
-                            setTimeout(() => {
-                                const optionElement = document.createElement('div');
-                                optionElement.className = 'option-card fade-in';
-                                
-                                optionElement.innerHTML = `
-                                    <div class="probability-badge">${option.probability}%</div>
-                                    <h3 class="option-title">${option.title}</h3>
-                                    <p class="option-description">${option.description}</p>
-                                `;
-                                
-                                optionsContainer.appendChild(optionElement);
-                            }, index * 200);
-                        });
-                    })
-                    .catch(error => {
-                        loadingSection.style.display = 'none';
-                        errorMessage.style.display = 'block';
-                        errorMessage.textContent = error;
-                    });
-            });
-        });
-    </script>
-</body>
+  </body>
 </html>
