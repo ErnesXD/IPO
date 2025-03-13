@@ -65,8 +65,9 @@
         <span
           class="material-icons"
           style="vertical-align: middle; margin-right: 8px"
-          >error_outline</span
         >
+          error_outline
+        </span>
         Ocurrió un error al procesar tu solicitud. Por favor, inténtalo de
         nuevo.
       </div>
@@ -74,7 +75,13 @@
       <section class="card results-section">
         <h2 class="results-header">Análisis de Decisiones</h2>
         <div class="situation-summary"></div>
-        <div class="options-container"></div>
+        <div class="options-container">
+          <div class="option-card">
+            <div class="probability-badge">80%</div>
+            <div class="option-title">Opción 1</div>
+            <div class="option-description">Descripción de la opción.</div>
+          </div>
+        </div>
         <div style="text-align: center; margin-top: 30px">
           <button id="restart-btn" class="restart-btn">
             <span class="material-icons icon">refresh</span>

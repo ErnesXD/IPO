@@ -18,14 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
             {
               parts: [
                 {
-                  text: `Como experto en toma de decisiones, analiza esta situación y contexto para generar 5 opciones de acción posibles.
+                  text: `Como experto en toma de decisiones, analiza esta situación y contexto para generar 4 opciones de acción posibles.
 
   Requerimientos:
-  1. Formato numerado del 1 al 5
+  1. Formato numerado del 1 al 4
   2. Primera línea: "1. [Título máximo 5 palabras]: [Descripción 2-3 oraciones]"
-  3. Las primeras 4 opciones deben ser específicas
-  4. Quinta opción siempre: "5. Opción 5: Otro: [Sugerir combinar enfoques]"
-  5. Lenguaje claro y práctico
+  3. Las primeras 4 opciones deben ser específicas y variadas
+  4. Lenguaje claro y práctico
 
   Situación: ${situation}
   Contexto: ${context || "Sin contexto adicional"}`,
@@ -77,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       // Asegurar mínimo 5 opciones
-      while (options.length < 5) {
+      while (options.length < 4) {
         options.push({
           title: `Opción ${options.length + 1}: ${
             options.length === 4 ? "Otro" : "Alternativa"
@@ -99,13 +98,10 @@ document.addEventListener("DOMContentLoaded", function () {
       let probabilities = [];
       let remaining = 100;
 
-      // Asignar probabilidades con ligera variación, manteniéndolas relativamente equilibradas
       for (let i = 0; i < length - 1; i++) {
-        // Añadir variación de -3 a +5 al valor base, pero asegurando que la probabilidad sea razonable
         const variation = Math.floor(Math.random() * 9) - 3;
-        const probability = Math.max(baseValue + variation, 10); // Mínimo 10%
+        const probability = Math.max(baseValue + variation, 10);
 
-        // Asegurar que no tomamos demasiado del restante
         const safeProb = Math.min(
           probability,
           remaining - (length - i - 1) * 10
@@ -114,13 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
         remaining -= safeProb;
       }
 
-      // La última opción toma el resto para asegurar que suman 100
       probabilities.push(remaining);
 
-      // Ordenar de mayor a menor
       probabilities.sort((a, b) => b - a);
 
-      // Mapear a las opciones
       return options.map((option, index) => {
         return {
           title: option.title,

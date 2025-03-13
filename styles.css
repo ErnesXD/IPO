@@ -1,10 +1,9 @@
 :root {
-
   --primary: #4a6fff; /* Azul más vibrante */
   --primary-dark: #3f51b5; /* Azul índigo para gradientes */
   --secondary: #ff4081; /* Rosa vibrante */
   --accent: #00bcd4; /* Cian */
-  --success: #4caf50; /* Verde para opciones positivas */
+  --success: #4a6fff; /* Verde para opciones positivas */
   --warning: #ffc107; /* Amarillo para opciones intermedias */
   --info: #2196f3; /* Azul claro para información */
   --background: #f8f9fa; /* Fondo gris muy claro */
@@ -304,27 +303,12 @@ textarea.input-field {
   background: var(--primary);
 }
 
-.option-card:nth-child(2)::before {
-  background: var(--info);
-}
-
-.option-card:nth-child(3)::before {
-  background: var(--success);
-}
-
-.option-card:nth-child(4)::before {
-  background: var(--warning);
-}
-
-.option-card:nth-child(5)::before {
-  background: var(--secondary);
-}
-
 .option-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* Todas las burbujas usan el mismo color: var(--primary) */
 .probability-badge {
   position: absolute;
   top: 15px;
@@ -335,22 +319,6 @@ textarea.input-field {
   border-radius: 50px;
   font-weight: bold;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.option-card:nth-child(2) .probability-badge {
-  background: var(--info);
-}
-
-.option-card:nth-child(3) .probability-badge {
-  background: var(--success);
-}
-
-.option-card:nth-child(4) .probability-badge {
-  background: var(--warning);
-}
-
-.option-card:nth-child(5) .probability-badge {
-  background: var(--secondary);
 }
 
 .option-title {
