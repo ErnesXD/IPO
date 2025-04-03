@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
           data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
         // Procesar la respuesta de la IA
-        const options = this.parseOptions(textResponse);
-        return this.assignProbabilities(options);
+        
+        return this.parseOptions(textResponse);
       } catch (error) {
         console.error("Error:", error);
         throw "Error al analizar tu situación. Por favor, inténtalo de nuevo.";
@@ -89,39 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return options.slice(0, 5);
     },
 
-    assignProbabilities: function (options) {
-      // Definir rangos de variación basados en la cantidad de opciones
-      const length = options.length;
-      let baseValue = Math.floor(100 / length); // Valor base para cada opción
-
-      // Crear array con probabilidades iniciales
-      let probabilities = [];
-      let remaining = 100;
-
-      for (let i = 0; i < length - 1; i++) {
-        const variation = Math.floor(Math.random() * 9) - 3;
-        const probability = Math.max(baseValue + variation, 10);
-
-        const safeProb = Math.min(
-          probability,
-          remaining - (length - i - 1) * 10
-        );
-        probabilities.push(safeProb);
-        remaining -= safeProb;
-      }
-
-      probabilities.push(remaining);
-
-      probabilities.sort((a, b) => b - a);
-
-      return options.map((option, index) => {
-        return {
-          title: option.title,
-          description: option.description,
-          probability: probabilities[index],
-        };
-      });
-    },
   };
 
   // Evento para analizar la situación
@@ -163,20 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const optionElement = document.createElement("div");
             optionElement.className = "option-card fade-in";
 
-            // Determinar clase de color basada en probabilidad
-            let probabilityClass = "";
-            if (index === 4) {
-              probabilityClass = "option-other";
-            } else if (option.probability > 50) {
-              probabilityClass = "option-high";
-            } else if (option.probability > 30) {
-              probabilityClass = "option-medium";
-            } else {
-              probabilityClass = "option-low";
-            }
-
             optionElement.innerHTML = `
-                    <div class="probability-badge">${option.probability}%</div>
+                    
                     <h3 class="option-title">${option.title}</h3>
                     <p class="option-description">${option.description}</p>
                   `;
