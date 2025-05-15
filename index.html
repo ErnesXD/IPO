@@ -1,138 +1,207 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DecisionIA - Asistente Inteligente para Decisiones</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="stylesIndex.css" />
     <link rel="stylesheet" href="styles.css" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="logo">
-        <span class="material-icons" style="font-size: 3rem">psychology</span>
-      </div>
-      <h1>DecisionIA</h1>
-      <p>
-        Asistente inteligente para la toma de decisiones basado en IA Generativa
-      </p>
-    </header>
+</head>
 
-    <div class="container">
-      <section class="card input-section">
-        <div class="form-group">
-          <label for="situation">
-            <span class="material-icons icon">help_outline</span>
-            Describe tu situación o dilema:
-          </label>
-          <textarea
-            id="situation"
-            class="input-field"
-            placeholder="Ejemplo: Estoy considerando cambiar de trabajo. Tengo una oferta con mejor salario pero implicaría mudarme a otra ciudad..."
-          ></textarea>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <span class="material-icons">psychology</span> DecisionIA
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="analizar.html">Analizar</a></li>
+                <li><a href="chats.html">Chats</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
         </div>
-        <div class="form-group">
-          <label for="context">
-            <span class="material-icons icon">info_outline</span>
-            Contexto adicional (opcional):
-          </label>
-          <textarea
-            id="context"
-            class="input-field"
-            placeholder="Añade información relevante como tus prioridades, valores, restricciones o cualquier factor importante..."
-          ></textarea>
-        </div>
-        <button id="analyze-btn" class="btn">
-          <span class="material-icons icon">analytics</span>
-          Analizar Situación
-        </button>
-      </section>
+    </nav>
 
-      
-
-      <div class="error-message">
-        <span
-          class="material-icons"
-          style="vertical-align: middle; margin-right: 8px"
-        >
-          error_outline
-        </span>
-        Ocurrió un error al procesar tu solicitud. Por favor, inténtalo de
-        nuevo.
-      </div>
-
-      <section class="card results-section">
-        <h2 class="results-header">Análisis de Decisiones</h2>
-        <div class="situation-summary"></div>
-        <div class="options-container">
-          <div class="option-card">
-           
-            <div class="option-title">Opción 1</div>
-            <div class="option-description">Descripción de la opción.</div>
-          </div>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Decisiones más inteligentes con IA</h1>
+            <p class="hero-subtitle">
+                DecisionIA te ayuda a tomar mejores decisiones analizando tus opciones con inteligencia artificial
+                avanzada
+            </p>
+            <a href="analizar.html" class="cta-button">
+                <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">
+                    trending_up
+                </span>
+                Comenzar análisis
+            </a>
         </div>
-        <div style="text-align: center; margin-top: 30px">
-          
-          <button id="restart-btn" class="restart-btn">
-            <span class="material-icons icon">refresh</span>
-            Nueva Consulta
-          </button>
-        </div>
-      </section>
-     <div class="loading">
-        <div class="loading-spinner"></div>
-        <p>Analizando tu situación con IA avanzada...</p>
-      </div>
-      <section class="features-section">
+    </section>
+
+    <section class="features-section">
         <div class="feature-card">
-          <span class="material-icons feature-icon">psychology</span>
-          <h3 class="feature-title">IA Avanzada</h3>
-          <p class="feature-description">
-            Utilizamos algoritmos de inteligencia artificial de última
-            generación para analizar tu situación y ofrecer perspectivas
-            objetivas.
-          </p>
+            <span class="material-icons feature-icon">psychology</span>
+            <h3 class="feature-title">IA Avanzada</h3>
+            <p class="feature-description">
+                Utilizamos algoritmos de inteligencia artificial de última generación para analizar tu situación y
+                ofrecer perspectivas objetivas.
+            </p>
         </div>
         <div class="feature-card">
-          <span class="material-icons feature-icon">privacy_tip</span>
-          <h3 class="feature-title">Privacidad Total</h3>
-          <p class="feature-description">
-            Tus datos no se almacenan. Tu información se utiliza únicamente para
-            procesar tu consulta actual.
-          </p>
+            <span class="material-icons feature-icon">privacy_tip</span>
+            <h3 class="feature-title">Privacidad Total</h3>
+            <p class="feature-description">
+                Tus datos no se almacenan. Tu información se utiliza únicamente para procesar tu consulta actual.
+            </p>
         </div>
         <div class="feature-card">
-          <span class="material-icons feature-icon">lightbulb</span>
-          <h3 class="feature-title">Enfoque Múltiple</h3>
-          <p class="feature-description">
-            Analizamos tu situación desde diferentes ángulos para darte una
-            visión completa de tus opciones.
-          </p>
+            <span class="material-icons feature-icon">lightbulb</span>
+            <h3 class="feature-title">Enfoque Múltiple</h3>
+            <p class="feature-description">
+                Analizamos tu situación desde diferentes ángulos para darte una visión completa de tus opciones.
+            </p>
         </div>
-        
-      </section>
-      
-      <div class="footer">
-        <p>
-          © 2025 DecisionIA - Asistente de toma de decisiones con IA Generativa
-        </p>
+    </section>
+
+    <section class="how-it-works">
+        <h2 class="section-title">Cómo Funciona</h2>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Describe tu situación</h3>
+                <p class="step-description">
+                    Explica la decisión que necesitas tomar y las opciones que estás considerando.
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Análisis con IA</h3>
+                <p class="step-description">
+                    Nuestro algoritmo procesa tu situación y evalúa los pros y contras de cada opción.
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Recibe perspectivas</h3>
+                <p class="step-description">
+                    Obtén un análisis detallado que te ayude a tomar una decisión más informada.
+                </p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Decide con confianza</h3>
+                <p class="step-description">
+                    Toma tu decisión con mayor seguridad gracias a un análisis objetivo y completo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    DecisionIA me ayudó a tomar una decisión difícil sobre un cambio de carrera. El análisis fue
+                    detallado y objetivo, lo que me dio claridad sobre mis opciones.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">ML</div>
+                    <div class="author-info">
+                        <h4>María López</h4>
+                        <p>Profesional en transición</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    Como emprendedor, tengo que tomar decisiones constantemente. Esta herramienta me ha ayudado a
+                    evaluar riesgos y oportunidades de una manera que nunca había experimentado antes.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CR</div>
+                    <div class="author-info">
+                        <h4>Carlos Rodríguez</h4>
+                        <p>Fundador de startup</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Cómo funciona DecisionIA?
+                </div>
+                <div class="faq-answer">
+                    DecisionIA utiliza algoritmos de IA generativa para analizar la información que proporciones sobre
+                    tu decisión. Evalúa factores, riesgos y oportunidades para ofrecer un análisis objetivo que te ayude
+                    a tomar mejores decisiones.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Es seguro compartir mi información?
+                </div>
+                <div class="faq-answer">
+                    Sí, tu privacidad es nuestra prioridad. No almacenamos tus datos personales ni la información sobre
+                    tus decisiones. Todo el procesamiento se realiza en tiempo real y se elimina después de tu sesión.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Qué tipo de decisiones puedo analizar?
+                </div>
+                <div class="faq-answer">
+                    DecisionIA puede ayudarte con una amplia variedad de decisiones: profesionales, personales,
+                    financieras, educativas y más. La herramienta es versátil y se adapta a diferentes contextos y
+                    complejidades.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Necesito crear una cuenta?
+                </div>
+                <div class="faq-answer">
+                    Puedes utilizar las funciones básicas sin una cuenta. Sin embargo, crear una cuenta te permite
+                    guardar tus análisis anteriores y acceder a funciones premium.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">¿Listo para tomar mejores decisiones?</h2>
+            <p class="cta-text">
+                Comienza a utilizar DecisionIA ahora y transforma la manera en que tomas decisiones importantes en tu
+                vida.
+            </p>
+            <a href="analizar.html" class="cta-button">Comenzar ahora</a>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>© 2025 DecisionIA - Asistente de toma de decisiones con IA Generativa</p>
         <div class="disclaimer">
-          <p>
-            Nota: Las probabilidades mostradas son ilustrativas. DecisionIA es
-            una herramienta de asistencia y las decisiones finales siempre deben
-            ser tomadas considerando tu propio criterio.
-            <a href="#">Términos de uso</a>
-          </p>
+            <p>
+                Nota: Las probabilidades mostradas son ilustrativas. DecisionIA es una herramienta de asistencia y las
+                decisiones finales siempre deben ser tomadas considerando tu propio criterio.
+                <a href="#">Términos de uso</a>
+            </p>
         </div>
-      </div>
     </div>
-  </body>
+
+
+</body>
+
 </html>

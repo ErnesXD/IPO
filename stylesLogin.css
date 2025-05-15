@@ -1,0 +1,167 @@
+/* Estilos para la página de login */
+.login-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 35px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 20px var(--shadow);
+  background-color: #fff;
+  border-top: 4px solid var(--secondary);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-header h1 {
+  color: var(--primary-dark);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.login-header .icon {
+  font-size: 52px;
+  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s;
+  background-color: var(--bg-light);
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(78, 107, 255, 0.15);
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.login-btn .icon {
+  margin-right: 10px;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 15px;
+}
+
+.register-link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.register-link a:hover {
+  color: var(--secondary);
+}
+
+.social-login {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.social-login p {
+  position: relative;
+  margin-bottom: 25px;
+  color: #777;
+}
+
+.social-login p::before,
+.social-login p::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.social-login p::before {
+  left: 0;
+}
+
+.social-login p::after {
+  right: 0;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  padding: 12px;
+  margin: 0 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  background-color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn img {
+  width: 24px;
+  margin-right: 12px;
+}

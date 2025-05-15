@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DecisionIA - Asistente Inteligente para Decisiones</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="stylesAnalizar.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo"><span class="material-icons">psychology</span> DecisionIA</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="analizar.html" class="active">Analizar</a></li>
+                <li><a href="chats.html">Chats</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1 class="page-title">Analiza tus decisiones</h1>
+        <p class="page-description">Describe tu situación y las opciones (2 a 5). Nuestra IA seleccionará la mejor
+            opción y explicará por qué.</p>
+
+        <div class="analysis-form">
+            <div class="form-group">
+                <label class="form-label"><span class="material-icons">help_outline</span>Situación o dilema:</label>
+                <textarea id="situation" class="input-field"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label"><span class="material-icons">list_alt</span>Opciones (máximo 5):</label>
+                <div id="options-container" class="options-container"></div>
+                <button id="add-option-btn" class="add-option-btn"><span class="material-icons">add_circle</span>Añadir
+                    opción</button>
+            </div>
+            <button id="analyze-btn" class="analyze-button"><span
+                    class="material-icons">analytics</span>Analizar</button>
+        </div>
+
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Analizando...</p>
+        </div>
+        <div class="results-section" id="results-section">
+            <h2>Mejor Opción</h2>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2025 DecisionIA - Asistente de toma de decisiones con IA Generativa</p>
+        <div class="disclaimer">
+            <p>
+                Nota: Las probabilidades mostradas son ilustrativas. DecisionIA es una herramienta de asistencia y las
+                decisiones finales siempre deben ser tomadas considerando tu propio criterio.
+                <a href="#">Términos de uso</a>
+            </p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

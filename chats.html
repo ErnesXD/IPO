@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DecisionIA - Historial de Chats</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="stylesChats.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="script.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <span class="material-icons">psychology</span> DecisionIA
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="analizar.html">Analizar</a></li>
+                <li><a href="chats.html" class="active">Chats</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="chats-header">
+            <h1 class="chats-title">
+                <span class="material-icons">chat</span>
+                Historial de Consultas
+            </h1>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Buscar consultas...">
+                <button class="search-btn">
+                    <span class="material-icons">search</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="filter-options">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Decisiones Personales</button>
+            <button class="filter-btn">Decisiones Laborales</button>
+            <button class="filter-btn">Decisiones Financieras</button>
+            <button class="filter-btn">Decisiones Educativas</button>
+            <button class="filter-btn">Otros</button>
+        </div>
+
+        <!-- Contenedor de chats -->
+        <div class="chats-container">
+            <!-- Chat 1 -->
+            <div class="chat-card">
+                <div class="chat-date">
+                    <span class="material-icons">schedule</span>
+                    15 Mayo, 2025
+                </div>
+                <h3 class="chat-title">¿Debo aceptar el trabajo en otra ciudad?</h3>
+                <p class="chat-snippet">
+                    Análisis de ventajas y desventajas sobre cambiar de trabajo a una ciudad diferente,
+                    considerando salario, costo de vida, oportunidades de crecimiento profesional y balance
+                    vida-trabajo.
+                </p>
+                <div class="chat-footer">
+                    <span class="chat-category">Laboral</span>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" title="Guardar">
+                            <span class="material-icons">bookmark_border</span>
+                        </button>
+                        <button class="chat-action-btn" title="Eliminar">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat 2 -->
+            <div class="chat-card">
+                <div class="chat-date">
+                    <span class="material-icons">schedule</span>
+                    14 Mayo, 2025
+                </div>
+                <h3 class="chat-title">Cambio de carrera a los 35 años</h3>
+                <p class="chat-snippet">
+                    Evaluación de los riesgos y beneficios de cambiar de carrera profesional, considerando
+                    experiencia previa, mercado laboral actual y perspectivas a largo plazo.
+                </p>
+                <div class="chat-footer">
+                    <span class="chat-category">Educación</span>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" title="Guardar">
+                            <span class="material-icons">bookmark_border</span>
+                        </button>
+                        <button class="chat-action-btn" title="Eliminar">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat 3 -->
+            <div class="chat-card">
+                <div class="chat-date">
+                    <span class="material-icons">schedule</span>
+                    12 Mayo, 2025
+                </div>
+                <h3 class="chat-title">Inversión en bienes raíces vs. mercado de valores</h3>
+                <p class="chat-snippet">
+                    Comparación detallada de invertir ahorros en propiedades inmobiliarias versus
+                    acciones y fondos, analizando rendimientos históricos, liquidez y riesgos.
+                </p>
+                <div class="chat-footer">
+                    <span class="chat-category">Finanzas</span>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" title="Guardar">
+                            <span class="material-icons">bookmark_border</span>
+                        </button>
+                        <button class="chat-action-btn" title="Eliminar">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat 4 -->
+            <div class="chat-card">
+                <div class="chat-date">
+                    <span class="material-icons">schedule</span>
+                    10 Mayo, 2025
+                </div>
+                <h3 class="chat-title">Mudanza: ¿Comprar casa o seguir rentando?</h3>
+                <p class="chat-snippet">
+                    Análisis financiero y personal sobre la decisión de comprar una casa propia versus
+                    continuar rentando, considerando tasas hipotecarias, mercado inmobiliario y situación personal.
+                </p>
+                <div class="chat-footer">
+                    <span class="chat-category">Personal</span>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" title="Guardar">
+                            <span class="material-icons">bookmark_border</span>
+                        </button>
+                        <button class="chat-action-btn" title="Eliminar">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat 5 -->
+            <div class="chat-card">
+                <div class="chat-date">
+                    <span class="material-icons">schedule</span>
+                    8 Mayo, 2025
+                </div>
+                <h3 class="chat-title">Emprender negocio propio o mantener empleo estable</h3>
+                <p class="chat-snippet">
+                    Evaluación de pros y contras entre la seguridad de un empleo corporativo versus
+                    los riesgos y potenciales beneficios de iniciar un emprendimiento.
+                </p>
+                <div class="chat-footer">
+                    <span class="chat-category">Laboral</span>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" title="Guardar">
+                            <span class="material-icons">bookmark_border</span>
+                        </button>
+                        <button class="chat-action-btn" title="Eliminar">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat 6 -->
+            <div class="chat-card">
+                <div class="chat-date">
+                    <span class="material-icons">schedule</span>
+                    5 Mayo, 2025
+                </div>
+                <h3 class="chat-title">Balance entre estudios de posgrado y experiencia laboral</h3>
+                <p class="chat-snippet">
+                    Análisis sobre el valor de continuar estudios académicos versus ganar experiencia profesional
+                    directa, considerando el campo laboral específico y tendencias de contratación.
+                </p>
+                <div class="chat-footer">
+                    <span class="chat-category">Educación</span>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" title="Guardar">
+                            <span class="material-icons">bookmark_border</span>
+                        </button>
+                        <button class="chat-action-btn" title="Eliminar">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <button class="page-btn">
+                <span class="material-icons">chevron_left</span>
+            </button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">
+                <span class="material-icons">chevron_right</span>
+            </button>
+        </div>
+
+        <!-- Estado vacío (se muestra solo cuando no hay chats) -->
+        <div class="empty-state" style="display: none;">
+            <span class="material-icons">forum</span>
+            <h3>No hay consultas recientes</h3>
+            <p>Aún no has realizado ninguna consulta. Comienza analizando una situación para guardar tu historial.</p>
+            <button class="start-chat-btn">
+                <span class="material-icons">add</span>
+                Iniciar nueva consulta
+            </button>
+        </div>
+
+
+    </div>
+    <div class="footer">
+        <p>© 2025 DecisionIA - Asistente de toma de decisiones con IA Generativa</p>
+        <div class="disclaimer">
+            <p>
+                Las decisiones finales siempre deben ser tomadas considerando tu propio criterio.
+                <a href="#">Términos de uso</a> | <a href="#">Política de privacidad</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

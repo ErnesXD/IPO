@@ -1,0 +1,325 @@
+
+
+.main-content {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+    text-align: center;
+    position: relative;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--secondary);
+    border-radius: 2px;
+}
+
+.page-description {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--gray);
+}
+
+.analysis-form {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 20px var(--shadow);
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-label .material-icons {
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+.input-field {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 60px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(74, 107, 223, 0.2);
+}
+
+.options-container {
+    margin-bottom: 1.5rem;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.option-label {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius) 0 0 var(--radius);
+    font-weight: 500;
+    min-width: 100px;
+    text-align: center;
+}
+
+.option-input {
+    flex-grow: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 1rem;
+}
+
+.option-remove {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.add-option-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light);
+    border: 2px dashed var(--primary);
+    color: var(--primary);
+    padding: 0.8rem;
+    width: 100%;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.add-option-btn .material-icons {
+    margin-right: 0.5rem;
+}
+
+.analyze-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.analyze-button .material-icons {
+    margin-right: 0.5rem;
+}
+
+.loading-container {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.results-section {
+    display: none;
+}
+
+.best-result {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 6px 15px var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.best-result h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.best-result p {
+    margin-bottom: 0.75rem;
+    color: var(--dark);
+}
+
+@media (max-width: 768px) {
+    .option-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .option-label {
+        border-radius: var(--radius) var(--radius) 0 0;
+        text-align: left;
+    }
+
+    .option-input {
+        border-radius: 0 0 var(--radius) var(--radius);
+    }
+}
+
+.results-section {
+    display: none;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 20px var(--shadow);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.results-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.results-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--secondary);
+}
+
+.best-result {
+    background: linear-gradient(135deg, rgba(245, 247, 255, 0.8), rgba(255, 255, 255, 0.9));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.best-result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary);
+    border-radius: 0 0 0 100%;
+    opacity: 0.1;
+}
+
+.best-result h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.best-result h3 .material-icons {
+    margin-right: 0.5rem;
+    color: var(--secondary);
+}
+
+.best-result p {
+    margin-bottom: 1rem;
+    color: var(--dark);
+    line-height: 1.7;
+}
+
+.best-result .highlight {
+    background-color: rgba(74, 107, 223, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 500;
+    color: var(--primary-dark);
+}
+
+.result-footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.try-again-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s;
+}
+
+.try-again-btn:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.try-again-btn .material-icons {
+    margin-right: 0.5rem;
+}
